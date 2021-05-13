@@ -1,0 +1,97 @@
+.imgNav{
+    width: 40px;
+    height: 40px;
+}
+.buscador{
+    width: 400px;
+}
+.icon-contacto{
+    width: 15px;
+    height: 15px;
+}
+
+.center{
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+h1{
+    width:100%;
+    margin-top:20px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-family:Impact;
+    text-align: center ;
+    text-shadow: 3px 3px 2px rgb(235, 232, 232);
+}
+#seccion-productos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+.row{
+    width: 18%;
+    height: 25rem;
+    margin:5px;
+    margin-top: 10px;
+}
+.btn-compra{
+    width:60%;
+    height: 30px;
+    margin-left: 12px;
+    margin-bottom: 10px;
+    
+}
+.card{
+    flex-wrap: nowrap;
+}
+.card:hover{
+    border: 5px solid rgba(0, 0, 0, 0.1)
+}
+.descripcionProducto{
+    height: 200px;
+    text-align: justify;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+#busqueda{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: baseline;
+    margin-top: 20px;
+}
+
+
+@media screen and (max-width: 940px) {
+    .row{
+        width:30%
+    }
+    .row img{
+        width: 100%;
+    }
+    
+    .descripcionProducto{
+        font-size:12px;
+        height:30%
+    }
+}
+@media screen and (max-width: 480px) {
+    .row{
+        width:100%
+    }
+    .row img{
+        width: 100%;
+    }
+    .descripcionProducto{
+        font-size:12px;
+        height:30%
+    }
+}
