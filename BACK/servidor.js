@@ -6,7 +6,7 @@ const cors = require("cors");
 const midd = require('./midd/midd.js');
 
 app.use(express.json());
-/* app.use(cors()); */ //CORS Global todas las apis
+ app.use(cors());  //CORS Global todas las apis
 /* app.use(midd.limiter); */ //Limiter Global todas las apis
 
 app.listen(process.env.PORT,()=>{
