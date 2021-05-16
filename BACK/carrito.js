@@ -11,7 +11,7 @@ class Carrito {
         this.imagen = imagen,
         this.precio = precio,
         this.descripcion = descripcion,
-        this.cantidadProductos
+        this.cantidadProductos = cantidadProductos
     }
 
     meterProducto(){
@@ -39,20 +39,23 @@ class Carrito {
                 imagen.className='imgProducto'
                 let precio=document.createElement('span')
                 precio.className='text-muted precio'
-                precio.textContent=`$${this.precio}`
+                precio.textContent=`$${this.precio * this.cantidadProductos}` 
                 let contenedorCantidad= document.createElement('div')
                 contenedorCantidad.className = 'input-group divCantidad'
                 let cantidad = document.createElement('input')
+                cantidad.id = `input${this.id_producto}`
                 cantidad.className = 'inputCantidad'
                 cantidad.setAttribute('value', this.cantidadProductos);
                 cantidad.setAttribute('type', 'number')
                 cantidad.setAttribute('disabled', true)
                 let cantidadAgregar = document.createElement('button')
-                cantidadAgregar.className = 'btn btn-outline-secondary'
+                cantidadAgregar.id = this.id_producto
+                cantidadAgregar.className = 'btn btn-outline-secondary btn-add'
                 cantidadAgregar.setAttribute('type', 'button')
                 cantidadAgregar.textContent = '+'
                 let cantidadEliminar = document.createElement('button')
-                cantidadEliminar.className = 'btn btn-outline-secondary'
+                cantidadEliminar.id = this.id_producto
+                cantidadEliminar.className = 'btn btn-outline-secondary btn-substract'
                 cantidadEliminar.textContent = '-'
                 contenedorInfo.appendChild(imagen)
                 contenedorInfo.appendChild(titulo)
@@ -70,7 +73,7 @@ class Carrito {
               
             listaProductos.appendChild(fragment)
             
-            total = total + this.precio;
+            total = total + (this.precio * this.cantidadProductos);
           
 
     }
@@ -81,40 +84,73 @@ const mostrarCarrito=()=>{
     numeroArticulos = (JSON.parse(localStorage.getItem("CARRITO"))).length; 
        
     articulos = JSON.parse(localStorage.getItem("CARRITO"));
-   
+    let cantidadProductos = 0;
 
     if(dataArticulos !== null){
         dataArticulos.forEach((element,index) => {
           let i=index;
-          if(articulos.find(element2 => element2 === element.id)){
+        
+          if( articulos.find(element2 => element2 === element.id)) {
             articulosEnCarro.push(element);
           }
+            
+          
         })
     }
     console.log(articulosEnCarro);
 
     articulosEnCarro.forEach((element , index )=> {
+      cantidadProductos = 0;
       let id_producto=element.id;
       let imagen= element.thumbnail;
       let precio= element.price;
       let descripcion=element.title;
-      let cantidadProductos = new Array();
-      articulosEnCarro.forEach((element2, index)=>{
-          if(element === element2){
-            cantidadProductos.push(element2);
-          }
-      
+      articulos.filter(element2 => {
+        if(element2 === element.id){
+          cantidadProductos++
+        
+        } 
       })
-      console.log(cantidadProductos);
       let carrito=new Carrito(id_producto,imagen,precio,descripcion, cantidadProductos)
       carrito.meterProducto();
-       
+      
+      
+  
+     
     });
+    //Agregamos los listeners a los botones
+    var botonesAgregar = document.getElementsByClassName('btn-add')
+    for(let i=0; i<botonesAgregar.length ;i++){
+      botonesAgregar[i].addEventListener('click',(response)=>{
+    
+    
+     articulos.push(botonesAgregar[i].id);
+     localStorage.setItem("CARRITO", JSON.stringify(articulos))
+  
+     location.reload();
+     
+     })
+    }
 
+    var botonesQuitar = document.getElementsByClassName('btn-substract')
+    for(let i=0; i<botonesQuitar.length ;i++){
+      botonesQuitar[i].addEventListener('click',(response)=>{
+    
+        var j = articulos.indexOf( botonesQuitar[i].id );
+ 
+        if ( j !== -1 ) {
+            articulos.splice( j, 1 );
+        }
+        localStorage.setItem("CARRITO", JSON.stringify(articulos))
+
+     location.reload();
+    
+     })
+    }
    
   }
 
-  
+
          
 mostrarCarrito();
 
@@ -126,12 +162,26 @@ mostrarCarrito();
     //BOTON DE COMPRA
     let buttonPagar = document.getElementById('finalizarCompra');
     buttonPagar.addEventListener('click', () =>{
-        Swal.fire('COMPRA REALIZADA!', 'Gracias, vuelve pronto!', 'success')
-        numeroArticulos = 0;
-        articulos = [];
-        localStorage.setItem("cantidad", numeroArticulos);
-        localStorage.setItem("Articulos", JSON.stringify(articulos));
+      Swal.fire({
+        title: 'Estan correctos tus productos?',
+        text: "Pasaremos a capturar tu direccion de envio!",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'No!',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, continuar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Guardado!',
+            '',
+            'success'
+          )
+        }
+      })
     })
 
+    
     let aPagar = document.getElementById('totalPagar');
     aPagar.textContent = `$${total}`;

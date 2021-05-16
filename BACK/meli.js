@@ -96,6 +96,8 @@ const mostrarProductos=(dataItems)=>{
      
   });
   seccionProductos.appendChild(fragment)
+
+  
  
 }
 
@@ -118,6 +120,13 @@ const agregarEnCarrito = () =>{
      
       enCarrito.push(botonesCompra[i].id)
       localStorage.setItem("CARRITO", JSON.stringify(enCarrito));
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'PRODUCTO GUARDADO',
+        showConfirmButton: false,
+        timer: 2000
+      })
     
     })
   }
