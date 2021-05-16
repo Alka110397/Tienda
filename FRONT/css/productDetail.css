@@ -1,0 +1,21 @@
+
+.contenedorProduct{
+    margin: auto;
+    display: flex;
+    justify-content: center !important;
+    width: 90% !important;
+    height: 500px;
+}
+.imagenProducto{
+    flex: 3;
+    background-color: red !important;
+    
+}
+#imagen{
+ width: 150px;
+ height: 150px;
+}
+.detalleProducto{
+    flex: 2;
+    background-color: green !important;
+}

@@ -10,7 +10,7 @@
     height: 15px;
 }
 
-.center{
+.centerBanner{
     justify-content: center !important;
     align-items: center !important;
 }
@@ -53,14 +53,17 @@ h1{
 .btn-ver-mas{
     font-size: 12px;
 }
-.btn{
+.btn .btnCard{
+  
     display:flex !important;
     align-items: center;
     justify-content: center;
     width:46%;
     height: 30px;
     padding: 5px;
+    
 }
+
 
 .card:hover{
     border: 5px solid rgba(0, 0, 0, 0.1)
@@ -83,7 +86,7 @@ h1{
     margin-top: 20px;
 }
 
-
+ 
 @media screen and (max-width: 940px) {
     .row{
         width:30%
@@ -108,4 +111,4 @@ h1{
         font-size:12px;
         height:30%
     }
-}
+} 

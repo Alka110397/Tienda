@@ -1,0 +1,59 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.infoProducto{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.imgProducto{
+    width: 20%;
+    
+}
+
+.my-0{
+    width:70%;
+}
+
+.imgNav{
+    width: 40px;
+    height: 40px;
+}
+.buscador{
+    width: 400px;
+}
+.icon-contacto{
+    width: 15px;
+    height: 15px;
+}
+
+.centerBanner{
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.precio{
+    align-self: center !important;
+    color: black !important;
+    font-weight: bold !important;
+   
+}
+.divCantidad{
+    height: 10px;
+    align-self: center;
+    justify-content: center;
+    
+}
+ 
+
+@media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}

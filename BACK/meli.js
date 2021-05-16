@@ -3,62 +3,80 @@ let urlMeli;
 const seccionProductos=document.getElementById("seccion-productos")
 const fragment=document.createDocumentFragment()
 //API CONSIGUE UN URL PARA LLAMAR UNA API DE MERCADO LIBRE
-async function getAPI() { 
-  let res = await fetch("http://localhost:3000/miAPI");
-  let endpointMeli = await res.json();
-  urlMeli = await endpointMeli.url;
-  console.log(urlMeli);
-  getItems(urlMeli);
+async function getAPI() {
+  try{
+    let res = await fetch("http://localhost:3000/miAPI");
+    let endpointMeli = await res.json();
+    urlMeli = await endpointMeli.url;
+    console.log(urlMeli);
+    getItems(urlMeli);
+  }catch (err){
+    console.log("Error desde miAPI", err);
+  } 
+  
 }
 
 async function getItems(url) {
-  let res = await fetch(url);
-  let items = await res.json();
-  dataItems = await items.results;
-  localStorage.setItem("DATA", JSON.stringify(dataItems));
-  mostrarProductos(dataItems);
-  //mejorVendido(dataItems);
-  console.log(dataItems);
+  try{
+    let res = await fetch(url);
+    let items = await res.json();
+    dataItems = await items.results;
+    localStorage.setItem("DATA", JSON.stringify(dataItems));
+    mostrarProductos(dataItems);
+    mejorVendido(dataItems);
+    agregarEnCarrito();
+    verMas();
+    //mejorVendido(dataItems);
+    console.log(dataItems);
+  }catch (err){
+    console.log("Error al obtener los productos", err);
+  }
+  
 }
 
 getAPI();
 //CREACION DE TARJETAS DINAMICAS
 class Producto{
-  constructor(idProducto,imagen,titulo,descripcion){
+  constructor(idProducto,imagen,precio,descripcion){
     this.idProducto=idProducto,
     this.imagen=imagen,
-    this.titulo=titulo,
+    this.precio=precio,
     this.descripcion=descripcion
   }
-  crearProducto(productos){
+  //Crea las tarjetas
+  crearProducto(){
     let contenedorProductos=document.createElement('div');
         contenedorProductos.className='row card'
         let imag=document.createElement('img')
-        imag.setAttribute('src',productos.imagen)
+        imag.setAttribute('src', this.imagen)
         imag.setAttribute('class','card-img-top')
         contenedorProductos.appendChild(imag)
         let cuerpoCarta=document.createElement('div');
         cuerpoCarta.className='card-body'
-        let titulo=document.createElement('h5')
-        titulo.textContent=`$${productos.titulo}`
-        titulo.className='card-title'
+        let precio=document.createElement('h5')
+        precio.textContent=`$${this.precio}`
+        precio.className='card-title'
         let descripcion=document.createElement('p')
-        descripcion.textContent=`${productos.descripcion.split(',',1)}`
+        descripcion.textContent=`${this.descripcion.split(',',1)}`
         descripcion.className='descripcionProducto card-text'
         let contenedorBotones=document.createElement('div')
         contenedorBotones.className='contenedor-botones'
         let btnComprar=document.createElement('button')
-        btnComprar.id=productos.idProducto
-        btnComprar.className='btn btn-primary btn-compra'
+        btnComprar.id=this.idProducto
+        btnComprar.className='btn btnCard btn-primary btn-compra'
         btnComprar.textContent='Comprar'
+        let detalle = document.createElement('a')
+        detalle.className = 'detalle'
+        detalle.setAttribute('href', './productDetail.html')
         let btnVerMas=document.createElement('button')
-        btnVerMas.id=`verMas${productos.idProducto}`
-        btnVerMas.className='btn btn-primary btn-ver-mas'
+        btnVerMas.id=this.idProducto
+        btnVerMas.className='btn btnCard btn-primary btn-ver-mas'
         btnVerMas.textContent='Ver mas'
-        cuerpoCarta.appendChild(titulo)
+        cuerpoCarta.appendChild(precio)
         cuerpoCarta.appendChild(descripcion)
         contenedorBotones.appendChild(btnComprar)
-        contenedorBotones.appendChild(btnVerMas)
+        detalle.appendChild(btnVerMas)
+        contenedorBotones.appendChild(detalle)
         cuerpoCarta.appendChild(contenedorBotones)
         contenedorProductos.appendChild(cuerpoCarta)
 
@@ -66,18 +84,55 @@ class Producto{
         fragment.appendChild(clone)
   }
 }
-
-const product=new Producto();
+//Muestra las tarjetas
 const mostrarProductos=(dataItems)=>{
   dataItems.forEach((element , index )=> {
     let id_producto=element.id;
-    let imagenes= element.thumbnail;
+    let imagen= element.thumbnail;
     let precio= element.price;
     let descripcion=element.title;
-    let productos=new Producto(id_producto,imagenes,precio,descripcion)
-    product.crearProducto(productos);
+    let producto=new Producto(id_producto,imagen,precio,descripcion)
+    producto.crearProducto();
      
   });
   seccionProductos.appendChild(fragment)
  
 }
+
+//Listener boton Comprar
+const agregarEnCarrito = () =>{
+
+  let enCarrito;
+
+  if(JSON.parse(localStorage.getItem("CARRITO"))){
+    enCarrito = JSON.parse(localStorage.getItem("CARRITO"))
+  }
+  else{
+    enCarrito = new Array();
+  }
+
+  var botonesCompra = document.getElementsByClassName('btn-compra')
+  
+  for(let i=0; i<botonesCompra.length ;i++){
+    botonesCompra[i].addEventListener('click',(response)=>{
+     
+      enCarrito.push(botonesCompra[i].id)
+      localStorage.setItem("CARRITO", JSON.stringify(enCarrito));
+    
+    })
+  }
+}
+//Listener boton Ver mas
+const verMas = () =>{
+
+  var botonesVerMas = document.getElementsByClassName('btn-ver-mas')
+  
+  for(let i=0; i<botonesVerMas.length ;i++){
+    botonesVerMas[i].addEventListener('click',(response)=>{
+      localStorage.setItem("INFOPRODUCTO", JSON.stringify(botonesVerMas[i].id));
+      
+    })
+  }
+}
+
+
