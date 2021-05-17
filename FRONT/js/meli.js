@@ -34,6 +34,15 @@ async function getItems(url) {
   
 }
 
+async function setItems(url){
+  try{
+    let res = await fetch(url);
+    let items = await res.json();
+  }catch(err){
+    console.log("Erro al guardar productos en la DB");
+  }
+}
+
 getAPI();
 //CREACION DE TARJETAS DINAMICAS
 class Producto{
@@ -83,6 +92,19 @@ class Producto{
         let clone= contenedorProductos.cloneNode(true)
         fragment.appendChild(clone)
   }
+  async guardarProducto(){
+    let productoNuevo = [
+      this.idProducto,
+      this.descripcion,
+      this.precio,
+      this.imagen,
+      new Date()
+  ]
+  /* const rawResponse = await fetch('https://localhost:3000/productos',{ method: 'POST', body: productoNuevo });
+  const content = await rawResponse.json(); */
+  
+  
+  }
 }
 //Muestra las tarjetas
 const mostrarProductos=(dataItems)=>{
@@ -93,7 +115,7 @@ const mostrarProductos=(dataItems)=>{
     let descripcion=element.title;
     let producto=new Producto(id_producto,imagen,precio,descripcion)
     producto.crearProducto();
-     
+    producto.guardarProducto(element);
   });
   seccionProductos.appendChild(fragment)
 
