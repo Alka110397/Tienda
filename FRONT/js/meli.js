@@ -76,11 +76,12 @@ class Producto{
         btnComprar.textContent='Comprar'
         let detalle = document.createElement('a')
         detalle.className = 'detalle'
-        detalle.setAttribute('href', './productDetail.html')
+       /*  detalle.setAttribute('href', './productDetail.html') */
         let btnVerMas=document.createElement('button')
         btnVerMas.id=this.idProducto
         btnVerMas.className='btn btnCard btn-primary btn-ver-mas'
         btnVerMas.textContent='Ver mas'
+        btnVerMas.setAttribute('disabled', true)
         cuerpoCarta.appendChild(precio)
         cuerpoCarta.appendChild(descripcion)
         contenedorBotones.appendChild(btnComprar)

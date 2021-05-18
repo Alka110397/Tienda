@@ -118,6 +118,7 @@ const mostrarCarrito=()=>{
   
      
     });
+    console.log(total);
     //Agregamos los listeners a los botones
     var botonesAgregar = document.getElementsByClassName('btn-add')
     for(let i=0; i<botonesAgregar.length ;i++){
