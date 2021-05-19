@@ -96,6 +96,7 @@ const mostrarCarrito=()=>{
             
           
         })
+        
     }
     console.log(articulosEnCarro);
 
@@ -185,4 +186,4 @@ mostrarCarrito();
 
     
     let aPagar = document.getElementById('totalPagar');
-    aPagar.textContent = `$${total}`;
+    aPagar.textContent = `$${total.toFixed(2)}`;
