@@ -1,0 +1,52 @@
+#seccion-carrusel{
+    width: 100%; 
+    border-bottom: 3px solid rgba(0, 0, 0,0.1);
+    
+}
+.contenedor-imagen{
+    display: flex;
+    width: 20%;
+    
+}
+.w-100{
+    padding-right: 40px;
+    border-right: 3px solid rgba(0, 0, 0,0.1);
+}
+.item-contenedor{
+    display: flex;
+    flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   height: 300px;
+}
+.carousel-indicators [data-bs-target] {
+    background-color: black !important;
+}
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    background-color:rgba(0, 0, 0,0.3);
+}
+#img1 #img2 #img3{
+    align-self: center;
+    
+}
+.text-carrusel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    align-items: center;
+    font-family: impact ;
+}
+@media screen and (max-width: 940px) {
+    .contenedor-imagen{
+        width: 40% !important;
+        height: 100px ;
+        
+    }
+}
+@media screen and (max-width: 480px) {
+    .contenedor-imagen{
+        width: 40% !important;
+        height: 100px ;
+    }
+}

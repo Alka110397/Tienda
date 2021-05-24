@@ -1,0 +1,87 @@
+body{
+    background-color: white !important;
+    
+}
+.navbar-nav{
+    align-items: flex-start;
+}
+.contenedorMain{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top:5%;
+
+}
+.logotipo{
+    display:flex;  
+    width:40%;
+    height:400px;
+    align-items: center;
+    padding-right: 20px;
+    border-right: solid rgba(0, 0, 0, 0.3);
+
+    
+}
+.login{
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+    margin-left: 20px;
+}
+
+.mb-4{
+    width: 100%;
+}
+.formulario{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around;
+    width: 400px;
+    height:400px;
+    background: linear-gradient(135deg, rgb(47, 47, 47) 38%, rgb(73, 73, 73) 93%) !important;
+    padding:10px;
+    backdrop-filter: blur(30px);
+    border: 1px rgba(100, 0, 0, 0.055);
+    border-radius: 5px;
+}
+.formulario h1{
+    text-shadow: 3px 3px 2px rgb(0 0 0)  !important;
+}
+.formulario .mb-3{
+    color: white !important;
+}
+.btn-primary{
+    background:linear-gradient(to bottom right, rgb(226, 0, 0), rgb(194, 1, 1)) !important;
+    border: solid 1px rgba(92, 1, 1, 0.24);
+    border-radius: 5px;
+}
+.btn-primary:hover{
+    background:linear-gradient(to bottom right, rgba(240, 8, 8, 0.911), rgb(255, 0, 0)) !important;
+    backdrop-filter: blur(10px);
+    border: solid 1px rgba(112, 1, 1, 0.26);
+    
+}
+.crear-cuenta{
+    width: 100%;
+   
+}
+.crear-cuenta a{
+    color: white !important;
+}
+.crear-cuenta a:hover{
+    color:rgb(202, 199, 199) !important
+}
+
+
+.form-check-label{
+    color:white !important
+}
+.form-check-label a{
+    color:white !important
+}
+.form-check-label a:hover{
+    color:rgb(202, 199, 199) !important
+}

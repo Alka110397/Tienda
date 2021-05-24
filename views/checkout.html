@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../node_modules/sweetalert2/dist/sweetalert2.js"></script>
+    <link rel="stylesheet" href="../../node_modules/sweetalert2/dist/sweetalert2.min.css"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/checkout.css">
+    <title>Document</title>
+</head>
+
+<header>
+      <div style="background-color: red; height: 20px;">
+        <div class="d-flex centerBanner">
+            <div>
+                <p style="color: white; font-weight: bold;"><i></i></p>
+            </div> 
+        </div> 
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid d-flex">
+            <div class="d-flex" style="flex: 1;">
+                <img src="/public/assets/logo-negro.png" alt="" width="40px">
+                <a class="navbar-brand" href="./index.html">Productos YA!</a>
+            </div>
+          
+            <div class="d-flex" style="flex: 1; justify-content: flex-end;">
+              <a href="../views/login.html"><img class="imgNav me-2" src="/public/assets/user.png" alt="" class="iconnav"></a>
+                <img class="imgNav me-2" src="https://ventiapp.blob.core.windows.net/storage/mshops/carrito.svg" alt="" class="iconnav">
+            </div>
+        </div>
+    </nav>
+</header>
+
+<body>
+
+    <div class="container">
+        <main>
+          <div class="py-5 text-center">
+            <h2>MI CARRITO DE COMPRA</h2>
+            <p class="lead">Estimado cliente le sugerimos verificar la siguiente información para proceder a la compra de sus productos.</p>
+          </div>
+      
+          <div class="row g-3">
+            <div class="col-md-12 col-lg-12 order-md-last">
+              <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Tus productos</span>
+                <p class="badge bg-secondary rounded-pill" id="numeroProductos"></p>
+              </h4>
+              <ul class="list-group mb-3 lista-productos">
+                
+                <div  id="lista-productos">
+      
+                </div>
+
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Total (MXN)</span>
+                  <strong id="totalPagar"></strong>
+                </li>
+              </ul>
+
+              <button class="w-100 btn btn-primary btn-lg" id="finalizarCompra">CONTINUAR A LA COMPRA</button>
+      
+            </div>
+            <!-- <div class="col-md-7 col-lg-8">
+              <h4 class="mb-3">Información del Cliente</h4>
+              <form class="needs-validation" novalidate>
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label for="firstName" class="form-label">Nombre(s)</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                    <div class="invalid-feedback">
+                      Valid first name is required.
+                    </div>
+                  </div>
+      
+                  <div class="col-sm-6">
+                    <label for="lastName" class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                    <div class="invalid-feedback">
+                      Valid last name is required.
+                    </div>
+                  </div>
+      
+                  <div class="col-12">
+                    <label for="username" class="form-label">Usuario</label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text">@</span>
+                      <input type="text" class="form-control" id="username" placeholder="Usuario" required>
+                    <div class="invalid-feedback">
+                        Your username is required.
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col-12">
+                    <label for="email" class="form-label">Email <span class="text-muted">(Opcional)</span></label>
+                    <input type="email" class="form-control" id="email" placeholder="usuario@tecla.com">
+                    <div class="invalid-feedback">
+                      Please enter a valid email address for shipping updates.
+                    </div>
+                  </div>
+      
+                  <div class="col-12">
+                    <h4 class="mb-3">Domicilio</h4>
+                    <label for="address" class="form-label">Calle</label>
+                    <input type="text" class="form-control" id="address" placeholder="Olivos #12" required>
+                    <div class="invalid-feedback">
+                      Please enter your shipping address.
+                    </div>
+                  </div>
+      
+                  <div class="col-12">
+                    <label for="address2" class="form-label">Entre calles <span class="text-muted">(Opcional)</span></label>
+                    <input type="text" class="form-control" id="address2">
+                  </div>
+      
+                  <div class="col-md-5">
+                    <label for="country" class="form-label">Ciudad</label>
+                    <select class="form-select" id="country" required>
+                      <option value="">Elige...</option>
+                      <option>México</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      Porfavor elige una ciudad válida.
+                    </div>
+                  </div>
+      
+                  <div class="col-md-4">
+                    <label for="state" class="form-label">Estado</label>
+                    <select class="form-select" id="estados" required>
+                      <option value="">Elige...</option>
+                      
+                    </select>
+                    <div class="invalid-feedback">
+                      Porfavor elige un estado válido.
+                    </div>
+                  </div>
+      
+                  <div class="col-md-3">
+                    <label for="zip" class="form-label">Código Postal</label>
+                    <input type="text" class="form-control" id="zip" placeholder="" required>
+                    <div class="invalid-feedback">
+                      Código postal es requerido.
+                    </div>
+                  </div>
+                </div>
+      
+                <hr class="my-4">
+      
+                <h4 class="mb-3">Forma de Pago</h4>
+      
+                <div class="my-3">
+                  <div class="form-check">
+                    <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                    <label class="form-check-label" for="credit">Tarjeta de crédito</label>
+                  </div>
+                  <div class="form-check">
+                    <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                    <label class="form-check-label" for="debit">Tarjeta de débito</label>
+                  </div>
+                  <div class="form-check">
+                    <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                    <label class="form-check-label" for="paypal">PayPal</label>
+                  </div>
+                </div>
+      
+                <div class="row gy-3">
+                  <div class="col-md-6">
+                    <label for="cc-name" class="form-label">Nombre del Propietario</label>
+                    <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                    <small class="text-muted">Nombre completo como se muestra en la tarjeta</small>
+                    <div class="invalid-feedback">
+                      El nombre es requerido.
+                    </div>
+                  </div>
+      
+                  <div class="col-md-6">
+                    <label for="cc-number" class="form-label">Número de la tarjeta</label>
+                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                    <div class="invalid-feedback">
+                      El número de la tarjeta es requerido.
+                    </div>
+                  </div>
+      
+                  <div class="col-md-3">
+                    <label for="cc-expiration" class="form-label">Expiración</label>
+                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                    <div class="invalid-feedback">
+                      La fecha de expiración es requerida.
+                    </div>
+                  </div>
+      
+                  <div class="col-md-3">
+                    <label for="cc-cvv" class="form-label">CVV</label>
+                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                    <div class="invalid-feedback">
+                      El código de seguridad es requerido.
+                    </div>
+                  </div>
+                </div>
+      
+                <hr class="my-4"> 
+              </form> -->
+           <!--  </div> -->
+          </div>
+        </main>
+    </div>
+   
+</body>
+
+<footer>
+
+</footer>
+    <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="../app/modelo/carrito.js"></script>
+</html>
