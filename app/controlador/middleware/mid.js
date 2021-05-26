@@ -1,4 +1,5 @@
 const rateLimit = require('express-rate-limit');
+const jwt = require("jsonwebtoken")
 
 const corsOptions = {
     origin : function (origin, callback) {
@@ -30,4 +31,10 @@ const controlApiKey = function (err, req, res, next) {
     }
 }
 
-module.exports = {corsOptions, limiter, controlApiKey}
+const generaToken = function (datos){
+    let token = jwt.sign({datos}, process.env.SECRET_KEY)
+    console.log(token)
+    return token
+}
+
+module.exports = {corsOptions, limiter, controlApiKey, generaToken}

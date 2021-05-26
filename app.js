@@ -9,10 +9,11 @@ const midd=require('./app/controlador/middleware/mid')
 const usuarios= require('./db/db.usuarios')
 const vistaUsuarios= require('./app/vista/routes/listaUsuarios')
 const vistaProductos=require('./app/vista/routes/vista.productos')
+const vistaLogin = require('./app/vista/routes/vista.login')
 
 
 app.use(express.json());
-//app.use(cors());  //CORS Global todas las apis
+app.use(cors());  //CORS Global todas las apis
 app.use(midd.limiter); //Limiter Global todas las apis
 
 app.use((err,req,res,next)=>{
@@ -45,3 +46,4 @@ inicioServidor();
 productosRoute(app);
 vistaUsuarios(app);
 vistaProductos(app);
+vistaLogin(app);
